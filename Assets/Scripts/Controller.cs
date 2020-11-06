@@ -6,6 +6,7 @@ public class Controller : MonoBehaviour
 {
     private Rigidbody _rb;
     public LayerMask Ground;
+    public int id = 0;
 
     private float _xInput;
     private float _yInput;
@@ -37,10 +38,10 @@ public class Controller : MonoBehaviour
 
     void Update()
     {
-        _xInput = Input.GetAxis("Horizontal");
-        _yInput = Input.GetAxis("Vertical");
+        _xInput = Input.GetAxis("Horizontal" + id);
+        _yInput = Input.GetAxis("Vertical" + id);
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump" + id) && isGrounded)
         {
             _rb.AddForce(Vector3.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
         }

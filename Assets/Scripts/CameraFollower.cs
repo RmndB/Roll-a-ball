@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class CameraFollower : MonoBehaviour
 {
-    private GameObject player;
+    public GameObject player;
     public Vector3 offset;
     void Start()
     {
-        player = GameObject.Find("Player");
-        offset = new Vector3(0,5,-7);
+        offset = new Vector3(0,15,-15);
     }
     
     void Update()

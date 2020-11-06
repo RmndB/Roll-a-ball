@@ -1,32 +1,33 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class TouchItems : MonoBehaviour
 {
+    public int countPlayer;
+    public Text scoreUI;
 
-    public int countPlayer1;
-    
-    // Start is called before the first frame update
+    public LayerMask collectableLayer;
+
     void Start()
     {
-        countPlayer1 = 0;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        countPlayer = 0;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Item"))
+        if (((1 << other.gameObject.layer) & collectableLayer.value) != 0)
         {
             other.gameObject.SetActive(false);
-            countPlayer1++;
+            countPlayer++;
+            scoreUI.text = countPlayer.ToString();
         }
     }
-    
+
+    public void resetScore() {
+        countPlayer = 0;
+        scoreUI.text = countPlayer.ToString();
+    }
 }
