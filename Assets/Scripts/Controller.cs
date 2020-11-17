@@ -43,8 +43,13 @@ public class Controller : MonoBehaviour
 
         if (Input.GetButtonDown("Jump" + id) && isGrounded)
         {
-            _rb.AddForce(Vector3.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
+            jump();
         }
+    }
+
+    public void jump()
+    {
+        _rb.AddForce(Vector3.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
     }
 
     void FixedUpdate()
