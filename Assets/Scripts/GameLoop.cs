@@ -12,7 +12,7 @@ public class GameLoop : MonoBehaviour
 
     public Text timerUI;
 
-    public float defaultValue = 10; 
+    public float defaultValue = 30; 
     public float timer;
 
     public GameObject spawner;

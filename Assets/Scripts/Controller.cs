@@ -38,8 +38,16 @@ public class Controller : MonoBehaviour
 
     void Update()
     {
-        _xInput = Input.GetAxis("Horizontal" + id);
-        _yInput = Input.GetAxis("Vertical" + id);
+        if (id == 1)
+        {
+            _xInput = Input.GetAxis("Horizontal");
+            _yInput = Input.GetAxis("Vertical");
+        }
+        else
+        {
+            _xInput = Input.GetAxis("Horizontal" + id);
+            _yInput = Input.GetAxis("Vertical" + id);
+        }
 
         if (Input.GetButtonDown("Jump" + id) && isGrounded)
         {
