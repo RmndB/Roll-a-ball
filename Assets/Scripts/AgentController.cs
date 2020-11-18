@@ -6,52 +6,64 @@ using UnityEngine.AI;
 public class AgentController : MonoBehaviour
 {
     public GameObject destination;
-    private NavMeshAgent navMeshAgent;
     public GameObject coinsContainer;
+    public Pathfinder pathfinder;
+    public Vector3 closestNodeCoord;
+    public float speed = 10.0f;
+
+    private NavMeshAgent navMeshAgent;
+    private Rigidbody rigidbody;
 
     void Start()
     {
-        navMeshAgent = this.GetComponent<NavMeshAgent>();
+        rigidbody = this.GetComponent<Rigidbody>();
 
-        if (navMeshAgent == null)
+        if (rigidbody == null)
         {
-            Debug.LogError("Failled to attach navMeshAgent");
+            Debug.LogError("Failled to attach rigidbody");
         }
         else
         {
             pickUpDestination();
-            SetDestination();
+            destination = coinsContainer;
         }
+    }
+
+    private void Update()
+    {
+        if (destination == null || !destination.activeSelf || destination == coinsContainer)
+        {
+            if (coinsContainer.GetComponentsInChildren<Transform>().Length > 1)
+            {
+                pickUpDestination();
+            }
+            else
+            {
+                destination = coinsContainer;
+                pathfinder.setTarget(coinsContainer.transform);
+            }
+
+        }
+        SetDestination();
+        Move();
     }
 
     private void SetDestination()
     {
 
-        Vector3 targetVector = destination.transform.position;
-        // Clumsy
-        /*
-        float distance = Vector3.Distance(this.transform.position, targetVector);
-        float margin = 3;
-        targetVector.x = targetVector.x + Random.Range(-distance/margin, distance/margin);
-        targetVector.y = targetVector.y + Random.Range(-distance/margin, distance/margin);
-        targetVector.z = targetVector.z + Random.Range(-distance/margin, distance/margin);
-        */
-        navMeshAgent.SetDestination(targetVector);
-
-        // TODO: Rotate
+        closestNodeCoord = pathfinder.getClosestNodeCoord();
+        // TODO: TP3 Rotate
     }
 
     private void pickUpDestination() {
         Transform[] childs = coinsContainer.GetComponentsInChildren<Transform>();
-        destination = childs[Random.Range(0, childs.Length)].gameObject;
+        destination = childs[Random.Range(1, childs.Length)].gameObject;
+        pathfinder.setTarget(destination.transform);
     }
 
-    private void Update()
+    private void Move()
     {
-        if (destination == null || !destination.activeSelf)
-        {
-            pickUpDestination();
-        }
-        SetDestination();
+        float step = speed * Time.deltaTime;
+        this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3(closestNodeCoord.x, this.transform.position.y, closestNodeCoord.z), step);
     }
 }
