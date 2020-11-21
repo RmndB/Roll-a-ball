@@ -1,18 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Factory : MonoBehaviour
 {
+    public Grid grid;
     public GameObject prefab;
+    public int numberOfCoins;
+    public int height;
 
-    public int maxNumberOfEntities = 15;
-
-    public List<Vector2> pos;
-    private int height = 15;
-
-    public void clean() {
-        foreach (Transform child in this.transform)
+    public void clean()
+    {
+        foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
         }
@@ -20,10 +17,11 @@ public class Factory : MonoBehaviour
 
     public void create()
     {
-        foreach (Vector2 entityPos in pos)
+        for (int i = 0; i < numberOfCoins; i++)
         {
-            GameObject newCollectable = Instantiate(prefab, new Vector3(entityPos.x, height, entityPos.y), prefab.transform.rotation);
-            newCollectable.transform.parent = this.transform;
+            Node targetNode = grid.GetAWalkableNode();
+            GameObject newCollectable = Instantiate(prefab, new Vector3(targetNode.gridX - grid.size.x / 2, height, targetNode.gridY - grid.size.y / 2), prefab.transform.rotation);
+            newCollectable.transform.parent = transform;
         }
     }
 }

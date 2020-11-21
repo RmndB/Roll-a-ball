@@ -17,15 +17,6 @@ public class Grid : MonoBehaviour
 
     public List<Node> path;
 
-    private void Start()
-    {
-        nodeDiamater = radius * 2;
-        gridSizeX = Mathf.RoundToInt(size.x/nodeDiamater);
-        gridSizeY = Mathf.RoundToInt(size.y/nodeDiamater);
-
-        CreateGrid();
-    }
-
     public List<Node> GetNeighbours(Node node)
     {
         List<Node> neighbours = new List<Node>();
@@ -50,8 +41,12 @@ public class Grid : MonoBehaviour
         return neighbours;
     }
 
-    private void CreateGrid()
+    public void CreateGrid()
     {
+        nodeDiamater = radius * 2;
+        gridSizeX = Mathf.RoundToInt(size.x / nodeDiamater);
+        gridSizeY = Mathf.RoundToInt(size.y / nodeDiamater);
+
         grid = new Node[gridSizeX, gridSizeY];
         Vector3 worldBottomLeft = transform.position - Vector3.right * size.x / 2 - Vector3.forward * size.y / 2;
 
@@ -93,5 +88,24 @@ public class Grid : MonoBehaviour
                 Gizmos.DrawCube(n.coord, Vector3.one * (nodeDiamater - .1f));
             }
         }
+    }
+
+    public Node GetAWalkableNode()
+    {
+
+        int randomX = UnityEngine.Random.Range(0, Mathf.RoundToInt(size.x));
+        int randomY = UnityEngine.Random.Range(0, Mathf.RoundToInt(size.y));
+
+        Node randomNode = grid[randomX, randomY];
+
+        if (randomNode.walkable)
+        {
+            return randomNode;
+        }
+        else
+        {
+            return GetAWalkableNode();
+        }
+
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class GameLoop : MonoBehaviour
@@ -12,11 +10,11 @@ public class GameLoop : MonoBehaviour
 
     public Text timerUI;
 
-    public float defaultValue = 10; 
+    public float defaultValue = 10;
     public float timer;
 
-    public GameObject spawner;
-    private Factory factory;
+    public Grid grid;
+    public Factory factory;
 
     private void Start()
     {
@@ -24,17 +22,18 @@ public class GameLoop : MonoBehaviour
         touchItemsPlayer1 = player1.GetComponent<TouchItems>();
         touchItemsPlayer2 = player2.GetComponent<TouchItems>();
 
-        factory = spawner.GetComponent<Factory>();
+        grid.CreateGrid();
         factory.create();
     }
 
-    void Update()
+    private void Update()
     {
         if (timer > 0)
         {
             timer -= Time.deltaTime;
         }
-        else {
+        else
+        {
             timer = defaultValue;
 
             touchItemsPlayer1.resetScore();
@@ -48,7 +47,8 @@ public class GameLoop : MonoBehaviour
             {
                 // P2 wins
             }
-            else {
+            else
+            {
                 // Tie
             }
 
