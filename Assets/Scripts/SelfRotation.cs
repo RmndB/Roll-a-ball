@@ -1,18 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SelfRotation : MonoBehaviour
 {
-    private int rotationSpeed;
-    public int limit = 5;
+    private const int ROTATION_SPEED_LIMIT = 5;
 
-    void Start()
+    private int rotationSpeed;
+
+    private void Start()
     {
-        rotationSpeed = Random.Range(-limit, limit);
+        rotationSpeed = Random.Range(-ROTATION_SPEED_LIMIT, ROTATION_SPEED_LIMIT);
     }
 
-    void Update()
+    private void Update()
     {
         transform.Rotate(0, rotationSpeed, 0, Space.World);
     }
