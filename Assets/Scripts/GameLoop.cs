@@ -1,59 +1,60 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class GameLoop : MonoBehaviour
 {
-    public GameObject player1;
-    public GameObject player2;
+    private const float DEFAULT_TIMER_VALUE = 10;
+
+    [SerializeField]
+    private GameObject player1 = default;
+    [SerializeField]
+    private GameObject player2 = default;
+    [SerializeField]
+    private Text timerUI = default;
+    [SerializeField]
+    private Factory factory = default;
+
     private TouchItems touchItemsPlayer1;
     private TouchItems touchItemsPlayer2;
-
-    public Text timerUI;
-
-    public float defaultValue = 30; 
-    public float timer;
-
-    public GameObject spawner;
-    private Factory factory;
+    private float timer;
 
     private void Start()
     {
-        timer = defaultValue;
+        timer = DEFAULT_TIMER_VALUE;
         touchItemsPlayer1 = player1.GetComponent<TouchItems>();
         touchItemsPlayer2 = player2.GetComponent<TouchItems>();
 
-        factory = spawner.GetComponent<Factory>();
-        factory.create();
+        factory.Create();
     }
 
-    void Update()
+    private void Update()
     {
         if (timer > 0)
         {
             timer -= Time.deltaTime;
         }
-        else {
-            timer = defaultValue;
+        else
+        {
+            timer = DEFAULT_TIMER_VALUE;
 
-            touchItemsPlayer1.resetScore();
-            touchItemsPlayer2.resetScore();
+            touchItemsPlayer1.ResetScore();
+            touchItemsPlayer2.ResetScore();
 
-            if (touchItemsPlayer1.countPlayer > touchItemsPlayer2.countPlayer)
+            if (touchItemsPlayer1.GetCountPlayer() > touchItemsPlayer2.GetCountPlayer())
             {
                 // P1 wins
             }
-            else if (touchItemsPlayer1.countPlayer < touchItemsPlayer2.countPlayer)
+            else if (touchItemsPlayer1.GetCountPlayer() < touchItemsPlayer2.GetCountPlayer())
             {
                 // P2 wins
             }
-            else {
+            else
+            {
                 // Tie
             }
 
-            factory.clean();
-            factory.create();
+            factory.Clean();
+            factory.Create();
         }
         timerUI.text = Mathf.Round(timer).ToString() + "s";
     }

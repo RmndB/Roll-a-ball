@@ -1,20 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraFollower : MonoBehaviour
 {
-    public GameObject player;
-    public Vector3 offset;
-    void Start()
+    public Vector3 OFFSET { get { return new Vector3(0, 15, -15); } }
+
+    [SerializeField]
+    private GameObject player = default;
+
+    private Vector3 offset;
+
+    private void Update()
     {
-        offset = new Vector3(0,15,-15);
-    }
-    
-    void Update()
-    {
-        
-        transform.position = (player.transform.position + offset);
+        transform.position = (player.transform.position + OFFSET);
         transform.LookAt(player.transform);
     }
 }

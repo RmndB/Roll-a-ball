@@ -1,62 +1,79 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
-    private Rigidbody _rb;
-    public LayerMask Ground;
-    public int id = 0;
+    private const float SPEED = 10.0f;
+    private const float JUMP_HEIGHT = 2.0f;
 
-    private float _xInput;
-    private float _yInput;
+    [SerializeField]
+    private int controller = default;
+    [SerializeField]
+    private LayerMask groundLayer = default;
+    [SerializeField]
+    private int id = default;
 
-    public float speed = 10.0f;
-    public float JumpHeight = 2f;
-    public bool isGrounded;
+    private new Rigidbody rigidbody;
+    private bool isGrounded;
+    private float x;
+    private float y;
 
-    void Start()
+    private void Start()
     {
-        _rb = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
-    void OnCollisionStay(Collision collision)
+    private void Update()
     {
-        if (((1 << collision.gameObject.layer) & Ground) != 0)
+        if (controller == 0)
+        {
+            x = Input.GetAxis("HorizontalKeyboard" + id);
+            y = Input.GetAxis("VerticalKeyboard" + id);
+
+            if (Input.GetButtonDown("JumpKeyboard" + id) && isGrounded)
+            {
+                Jump();
+            }
+        }
+        else if (controller == 1)
+        {
+            x = Input.GetAxis("HorizontalGamepad" + id);
+            y = -Input.GetAxis("VerticalGamepad" + id);
+
+            if (Input.GetButtonDown("JumpGamepad" + id) && isGrounded)
+            {
+                Jump();
+            }
+        }
+        else
+        {
+            throw new Exception("Controller not handled, please choose 0 for keyboard or 1 for gamepad");
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        rigidbody.AddForce(new Vector3(x, 0.0f, y) * SPEED);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (((1 << collision.gameObject.layer) & groundLayer) != 0)
         {
             isGrounded = true;
         }
     }
 
-    void OnCollisionExit(Collision collision)
+    private void OnCollisionExit(Collision collision)
     {
-        if (((1 << collision.gameObject.layer) & Ground) != 0)
+        if (((1 << collision.gameObject.layer) & groundLayer) != 0)
         {
             isGrounded = false;
         }
     }
 
-    void Update()
+    public void Jump()
     {
-        if (id == 1)
-        {
-            _xInput = Input.GetAxis("Horizontal");
-            _yInput = Input.GetAxis("Vertical");
-        }
-        else
-        {
-            _xInput = Input.GetAxis("Horizontal" + id);
-            _yInput = Input.GetAxis("Vertical" + id);
-        }
-
-        if (Input.GetButtonDown("Jump" + id) && isGrounded)
-        {
-            _rb.AddForce(Vector3.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
-        }
-    }
-
-    void FixedUpdate()
-    {
-        _rb.AddForce(new Vector3(_xInput, 0.0f, _yInput) * speed);
+        rigidbody.AddForce(Vector3.up * Mathf.Sqrt(JUMP_HEIGHT * -2f * Physics.gravity.y), ForceMode.VelocityChange);
     }
 }

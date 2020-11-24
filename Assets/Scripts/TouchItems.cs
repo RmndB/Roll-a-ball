@@ -1,24 +1,25 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine;
 
 public class TouchItems : MonoBehaviour
 {
-    public int countPlayer;
-    public Text scoreUI;
+    private const int DEFAULT_COUNT_VALUE = 0;
 
-    public LayerMask collectableLayer;
+    [SerializeField]
+    private LayerMask collectableLayer = default;
+    [SerializeField]
+    private Text scoreUI = default;
 
-    void Start()
+    private int countPlayer;
+
+    private void Start()
     {
-        countPlayer = 0;
+        countPlayer = DEFAULT_COUNT_VALUE;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (((1 << other.gameObject.layer) & collectableLayer.value) != 0)
+        if (((1 << other.gameObject.layer) & collectableLayer.value) != DEFAULT_COUNT_VALUE)
         {
             other.gameObject.SetActive(false);
             countPlayer++;
@@ -26,8 +27,14 @@ public class TouchItems : MonoBehaviour
         }
     }
 
-    public void resetScore() {
-        countPlayer = 0;
+    public void ResetScore()
+    {
+        countPlayer = DEFAULT_COUNT_VALUE;
         scoreUI.text = countPlayer.ToString();
+    }
+
+    public int GetCountPlayer()
+    {
+        return countPlayer;
     }
 }

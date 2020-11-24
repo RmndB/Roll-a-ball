@@ -1,29 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Factory : MonoBehaviour
 {
-    public GameObject prefab;
+    private const int NUMBER_OF_COLLECTABLE = 15;
+    private const int HEIGHT = 1;
 
-    public int maxNumberOfEntities = 15;
+    [SerializeField]
+    private Grid grid = default;
+    [SerializeField]
+    private GameObject prefab = default;
 
-    public List<Vector2> pos;
-    private int height = 15;
-
-    public void clean() {
-        foreach (Transform child in this.transform)
+    public void Clean()
+    {
+        foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
         }
     }
 
-    public void create()
+    public void Create()
     {
-        foreach (Vector2 entityPos in pos)
+        for (int i = 0; i < NUMBER_OF_COLLECTABLE; i++)
         {
-            GameObject newCollectable = Instantiate(prefab, new Vector3(entityPos.x, height, entityPos.y), prefab.transform.rotation);
-            newCollectable.transform.parent = this.transform;
+            Node targetNode = grid.GetAWalkableNode();
+            GameObject newCollectable = Instantiate(prefab, new Vector3(targetNode.GetX() - grid.GetSizeX() / 2, HEIGHT, targetNode.GetY() - grid.GetSizeY() / 2), prefab.transform.rotation);
+            newCollectable.transform.parent = transform;
         }
     }
 }
