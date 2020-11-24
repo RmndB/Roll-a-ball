@@ -12,6 +12,8 @@ public class Pathfinder : MonoBehaviour
     private Transform agent = default;
     private Transform target = default;
 
+    private List<Node> path;
+
     private void Start()
     {
         agent = this.GetComponent<Transform>();
@@ -27,8 +29,8 @@ public class Pathfinder : MonoBehaviour
 
     private void FindPath(Transform agent, Transform target)
     {
-        Node startNode = grid.NodeFromWorldPoint(agent.position);
-        Node targetNode = grid.NodeFromWorldPoint(target.position);
+        Node startNode = grid.RetrieveNode(agent.position);
+        Node targetNode = grid.RetrieveNode(target.position);
 
         List<Node> openSet = new List<Node>();
         HashSet<Node> closedSet = new HashSet<Node>();
@@ -91,7 +93,7 @@ public class Pathfinder : MonoBehaviour
             visitor = visitor.GetChild();
         }
 
-        grid.SetPath(shortestPath);
+        path = shortestPath;
     }
 
     private int ComputeCost(Node nodeA, Node nodeB)
@@ -122,9 +124,9 @@ public class Pathfinder : MonoBehaviour
 
     public Vector3 getClosestNodeCoord()
     {
-        if (grid.GetPath() != null && grid.GetPath().Count > 0)
+        if (path != null && path.Count > 0)
         {
-            return grid.GetPath()[0].GetCoord();
+            return path[0].GetCoord();
         }
         else
         {

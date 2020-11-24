@@ -13,7 +13,6 @@ public class Grid : MonoBehaviour
     private LayerMask unwalkableLayerMask = default;
 
     private Node[,] grid;
-    private List<Node> path;
 
     private void Awake()
     {
@@ -44,12 +43,12 @@ public class Grid : MonoBehaviour
                     continue;
                 }
 
-                int checkX = node.GetX() + x;
-                int checkY = node.GetY() + y;
+                int xAxis = node.GetX() + x;
+                int yAxis = node.GetY() + y;
 
-                if (checkX >= 0 && checkX < sizeX && checkY >= 0 && checkY < sizeY)
+                if (xAxis >= 0 && xAxis < sizeX && yAxis >= 0 && yAxis < sizeY)
                 {
-                    neighbours.Add(grid[checkX, checkY]);
+                    neighbours.Add(grid[xAxis, yAxis]);
                 }
             }
         }
@@ -57,7 +56,7 @@ public class Grid : MonoBehaviour
         return neighbours;
     }
 
-    public Node NodeFromWorldPoint(Vector3 coord)
+    public Node RetrieveNode(Vector3 coord)
     {
         float percentX = (coord.x + sizeX / 2) / sizeX;
         float percentY = (coord.z + sizeY / 2) / sizeY;
@@ -68,28 +67,6 @@ public class Grid : MonoBehaviour
         int y = Mathf.RoundToInt((sizeY - 1) * percentY);
 
         return grid[x, y];
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(transform.position, new Vector3(sizeX, 1, sizeY));
-
-        if (grid != null)
-        {
-            foreach (Node n in grid)
-            {
-                Gizmos.color = (n.GetWalkable()) ? Color.white : Color.red;
-                if (path != null)
-                {
-                    if (path.Contains(n))
-                    {
-                        Gizmos.color = Color.black;
-                    }
-                }
-
-                Gizmos.DrawCube(n.GetCoord(), Vector3.one * (RADIUS * 2 - .1f));
-            }
-        }
     }
 
     public Node GetAWalkableNode()
@@ -118,14 +95,5 @@ public class Grid : MonoBehaviour
     public int GetSizeY()
     {
         return sizeY;
-    }
-
-    public List<Node> GetPath() {
-        return path;
-    }
-
-    public void SetPath(List<Node> path)
-    {
-        this.path = path;
     }
 }

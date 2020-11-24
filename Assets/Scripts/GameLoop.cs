@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class GameLoop : MonoBehaviour
 {
-    private const float DEFAULT_TIMER_VALUE = 10;
+    private const float DEFAULT_TIMER_VALUE = 30;
 
     [SerializeField]
     private GameObject player1 = default;
