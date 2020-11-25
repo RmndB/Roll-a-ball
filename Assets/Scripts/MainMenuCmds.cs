@@ -1,17 +1,43 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuCmds : MonoBehaviour
 {
-    public GameObject mainMenu, optionMenu, cmdsPersoMenu, selectCmdsPersoMenu;
     public GameObject MainMenuFirst, OptionsFirst, CmdsPersoFirst, SelectCmdsPersoFirst;
-
+    public Slider SliderTime, SliderHard;
+    public TextMeshProUGUI txtDifficulty, txtTimeOfAGame;
     public void Start()
     {
+        float timeGame = PlayerPrefs.GetFloat("timeGame");
+        if (timeGame != 0)
+        {
+            MoveSliderTime(timeGame);
+            SliderTime.value = timeGame;
+        }
+        else
+        {
+            MoveSliderTime(30);
+            SliderTime.value = 30;
+        }
+
+        string niv = PlayerPrefs.GetString("diff");
+        if (niv == "Difficile")
+        {
+            MoveSliderDiff(1);
+            SliderHard.value = 1;
+        }
+        else
+        {
+            MoveSliderDiff(0);
+            SliderHard.value = 0;
+        }
+
         PlayerManager.useSuperAI = true;
         StartMainMenu();
     }
@@ -50,15 +76,29 @@ public class MainMenuCmds : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(SelectCmdsPersoFirst);
     }
 
-    public void setDiffAsHard()
+    public void MoveSliderDiff(float difficulty)
     {
-        PlayerManager.superAIHard = true;
+        if (difficulty == 0f)
+        {
+            txtDifficulty.text = "Facile";
+            PlayerManager.superAIHard = false;
+            PlayerPrefs.SetString("diff", "Facile");
+        }
+        else
+        {
+            txtDifficulty.text = "Difficile";
+            PlayerManager.superAIHard = true;
+            PlayerPrefs.SetString("diff", "Difficile");
+        }
     }
-
-    public void setDiffAsEasy()
+    
+    public void MoveSliderTime(float time)
     {
-        PlayerManager.superAIHard = false;
+        PlayerPrefs.SetFloat("timeGame", time);
+        txtTimeOfAGame.text = time.ToString() + " secondes";
+        GameLoop.timerValue = time;
     }
+    
     public void QuitGame()
     {
         Application.Quit();

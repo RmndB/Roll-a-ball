@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -9,6 +10,20 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField]
     private GameObject playerB = default;
+
+    private void Start()
+    {
+        string niv = PlayerPrefs.GetString("diff");
+        if (niv == "Difficile")
+        {
+            superAIHard = false;
+        }
+        else
+        {
+            superAIHard = false;
+            PlayerPrefs.SetString("diff", "Facile");
+        }
+    }
 
     private void Awake()
     {

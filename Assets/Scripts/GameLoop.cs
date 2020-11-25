@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class GameLoop : MonoBehaviour
 {
+    public static float timerValue { get; set; }
+    
     private const float DEFAULT_TIMER_VALUE = 30;
+    
     private const int PLAYER1WON = 0;
     private const int PLAYER2WON = 1;
     private const int YOUWON = 2;
@@ -31,7 +34,16 @@ public class GameLoop : MonoBehaviour
     private void Start()
     {
         victoryMenu.SetActive(false);
-        timer = DEFAULT_TIMER_VALUE;
+        
+        timerValue = PlayerPrefs.GetFloat("timeGame");
+        if (timerValue == 0)
+        {
+            PlayerPrefs.SetFloat("timeGame",DEFAULT_TIMER_VALUE);
+            timerValue = DEFAULT_TIMER_VALUE;
+            
+        }
+
+        timer = timerValue;
         touchItemsPlayer1 = player1.GetComponent<TouchItems>();
         touchItemsPlayer2 = player2.GetComponent<TouchItems>();
 
@@ -54,7 +66,7 @@ public class GameLoop : MonoBehaviour
         }
         else
         {
-            timer = DEFAULT_TIMER_VALUE;
+            timer = timerValue;
             showTheWinner();
             touchItemsPlayer1.ResetScore();
             touchItemsPlayer2.ResetScore();
@@ -121,6 +133,6 @@ public class GameLoop : MonoBehaviour
     {
         victoryMenu.SetActive(false);
         Time.timeScale = 1f;
-        timer = DEFAULT_TIMER_VALUE;
+        timer = timerValue;
     }
 }
