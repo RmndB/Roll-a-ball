@@ -12,18 +12,19 @@ public class MainMenuCmds : MonoBehaviour
 
     public void Start()
     {
+        PlayerManager.useSuperAI = true;
         StartMainMenu();
     }
 
     public void StartOnePlayer()
     {
-        PlayerManager.useAIasPlayerB = false;
+        PlayerManager.useAIasPlayerB = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     
     public void StartTwoPlayers()
     {
-        PlayerManager.useAIasPlayerB = true;
+        PlayerManager.useAIasPlayerB = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void StartMainMenu()
@@ -48,7 +49,16 @@ public class MainMenuCmds : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(SelectCmdsPersoFirst);
     }
-    
+
+    public void setDiffAsHard()
+    {
+        PlayerManager.superAIHard = true;
+    }
+
+    public void setDiffAsEasy()
+    {
+        PlayerManager.superAIHard = false;
+    }
     public void QuitGame()
     {
         Application.Quit();
