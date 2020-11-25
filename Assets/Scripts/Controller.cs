@@ -4,14 +4,13 @@ using UnityEngine;
 public class Controller : MonoBehaviour
 {
     private const float SPEED = 10.0f;
-    private const float JUMP_HEIGHT = 2.0f;
+    private const float JUMP_HEIGHT = 0.5f;
 
     [SerializeField]
     private int controller = default;
     [SerializeField]
     private LayerMask groundLayer = default;
     [SerializeField]
-    private int id = default;
 
     private new Rigidbody rigidbody;
     private bool isGrounded;

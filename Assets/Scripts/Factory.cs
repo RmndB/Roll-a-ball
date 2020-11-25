@@ -2,7 +2,7 @@
 
 public class Factory : MonoBehaviour
 {
-    private const int NUMBER_OF_COLLECTABLE = 15;
+    static public int NUMBER_OF_COLLECTABLE = 15;
     private const int HEIGHT = 1;
 
     [SerializeField]

@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool gamePaused = false;
-
+    public GameObject PauseMenuFirst;
     public GameObject pauseMenu;
+    public GameObject victoryMenu;
+    public GameObject VictoryMenuFirst;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +33,8 @@ public class PauseMenu : MonoBehaviour
     public void PauseTheGame()
     {
         pauseMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(PauseMenuFirst);
         Time.timeScale = 0f;
         gamePaused = true;
     }
