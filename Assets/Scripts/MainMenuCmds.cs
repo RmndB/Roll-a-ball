@@ -16,12 +16,14 @@ public class MainMenuCmds : MonoBehaviour
     }
 
     public void StartOnePlayer()
-    {        
-
+    {
+        PlayerManager.useAIasPlayerB = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     
     public void StartTwoPlayers()
     {
+        PlayerManager.useAIasPlayerB = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void StartMainMenu()

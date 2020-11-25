@@ -2,10 +2,10 @@
 
 public class PlayerManager : MonoBehaviour
 {
-    public static bool useAIasPlayerB = true;
-    public static bool useSuperAI = true;
-	// true -> hard, false -> easy
-    public static bool superAIHard = false;
+    public static bool useAIasPlayerB  { get; set; }
+    public static bool useSuperAI { get; set; }
+    // true -> hard, false -> easy
+    public static bool superAIHard { get; set; }
 
     [SerializeField]
     private GameObject playerB = default;
@@ -15,10 +15,14 @@ public class PlayerManager : MonoBehaviour
         if (useAIasPlayerB)
         {
             playerB.GetComponent<Controller>().enabled = false;
-            if(useSuperAI)
+            if (useSuperAI) {
+                playerB.GetComponent<AgentController>().enabled = false;
                 playerB.GetComponent<SuperAgentController>().enabled = true;
-            else
+            }
+            else {
                 playerB.GetComponent<AgentController>().enabled = true;
+                playerB.GetComponent<SuperAgentController>().enabled = false;
+            }
             playerB.GetComponent<Pathfinder>().enabled = true;
         }
         else
