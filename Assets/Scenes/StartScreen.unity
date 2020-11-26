@@ -440,10 +440,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1500047144}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 261aca0dd33c89f4885290e0633115bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 64453de572633504db7ebec62370f3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _progressBar: {fileID: 0}
 --- !u!114 &1500047146
 MonoBehaviour:
   m_ObjectHideFlags: 0
