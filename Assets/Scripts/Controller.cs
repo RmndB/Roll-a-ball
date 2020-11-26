@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class Controller : MonoBehaviour
 {
@@ -17,16 +18,71 @@ public class Controller : MonoBehaviour
     private float x;
     private float y;
 
+    private bool controlJoystick;
+    
     private bool fp1, fp2, bp1, bp2, lp1, lp2, rp1, rp2, jp1, jp2;
     private void Start()
     {
+        if (controller == 1 && MainMenuCmds.player1Control == "controller")
+        {
+            controlJoystick = true;
+        }
+        if (controller == 2 && MainMenuCmds.player2Control == "controller")
+        {
+            controlJoystick = true;
+        }
         rigidbody = GetComponent<Rigidbody>();
         fp1 = fp2 = bp1 = bp2 = lp1 = lp2 = rp1 = rp2 = jp1 = jp2 = false;
     }
 
     private void FixedUpdate()
     {
-        if (controller == 1)
+        if (controlJoystick && controller == 1)
+        {
+            x = Input.GetAxis("HorizontalGamepad");
+            y = -Input.GetAxis("VerticalGamepad");
+            
+            if (Input.GetButton("JumpGamepad") && isGrounded)
+            {
+                jp1 = true;
+                Jump();
+            }
+            else if (jp1)
+            {
+                jp1 = false;
+            }
+        }
+        else if (controlJoystick && controller == 2 && MainMenuCmds.player1Control == "controller")
+        {
+            x = Input.GetAxis("HorizontalGamepad");
+            y = -Input.GetAxis("VerticalGamepad");
+            
+            if (Input.GetButton("JumpGamepad") && isGrounded)
+            {
+                jp2 = true;
+                Jump();
+            }
+            else if (jp2)
+            {
+                jp2 = false;
+            }
+        }
+        else if (controlJoystick && controller == 2)
+        {
+            x = Input.GetAxis("HorizontalGamepad2");
+            y = -Input.GetAxis("VerticalGamepad2");
+            
+            if (Input.GetButton("JumpGamepad2") && isGrounded)
+            {
+                jp2 = true;
+                Jump();
+            }
+            else if (jp2)
+            {
+                jp2 = false;
+            }
+        }
+        else if (controller == 1)
         {
             // Player 1
             if (Input.GetKey(ControlsManager.ControlMng.forwardP1))
@@ -70,7 +126,7 @@ public class Controller : MonoBehaviour
             else if (lp1)
             {
                 lp1 = false;
-                y = 0;
+                x = 0;
             }
 
             if (Input.GetKey(ControlsManager.ControlMng.jumpP1) && isGrounded)
@@ -81,7 +137,6 @@ public class Controller : MonoBehaviour
             else if (jp1)
             {
                 jp1 = false;
-                y = 0;
             }
         }
         else
@@ -128,7 +183,7 @@ public class Controller : MonoBehaviour
             else if (lp2)
             {
                 lp2 = false;
-                y = 0;
+                x = 0;
             }
 
             if (Input.GetKey(ControlsManager.ControlMng.jumpP2) && isGrounded)
@@ -139,7 +194,6 @@ public class Controller : MonoBehaviour
             else if (jp2)
             {
                 jp2 = false;
-                y = 0;
             }
         }
 

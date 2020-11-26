@@ -9,11 +9,16 @@ using UnityEngine.UI;
 
 public class MainMenuCmds : MonoBehaviour
 {
+    static public string player1Control;
+    static public string player2Control;
     public GameObject MainMenuFirst, OptionsFirst, CmdsPersoFirst, SelectCmdsPersoFirst;
     public Slider SliderTime, SliderHard;
     public TextMeshProUGUI txtDifficulty, txtTimeOfAGame;
     public void Start()
     {
+        player1Control = "keyboard";
+        player2Control = "keyboard";
+        
         float timeGame = PlayerPrefs.GetFloat("timeGame");
         if (timeGame != 0)
         {
@@ -102,5 +107,28 @@ public class MainMenuCmds : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+    
+    public void setPlayer1Control(int control) 
+    {
+        if (control == 0)
+        {
+            player1Control = "keyboard";
+        }
+        else
+        {
+            player1Control = "controller";
+        }
+    }
+    public void setPlayer2Control(int control) 
+    {
+        if (control == 0)
+        {
+            player2Control = "keyboard";
+        }
+        else
+        {
+            player2Control = "controller";
+        }
     }
 }

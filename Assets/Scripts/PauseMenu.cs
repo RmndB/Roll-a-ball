@@ -21,7 +21,7 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(ControlsManager.ControlMng.pauseP1) || Input.GetKeyDown(ControlsManager.ControlMng.pauseP2) || Input.GetButtonDown("PauseGamepad"))
         {
             if (!gamePaused)
             {

@@ -38,7 +38,7 @@ InputManager:
     axis: 0
     joyNum: 1
   - serializedVersion: 3
-    m_Name: HorizontalGamepad1
+    m_Name: HorizontalGamepad
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -53,22 +53,6 @@ InputManager:
     type: 2
     axis: 0
     joyNum: 0
-  - serializedVersion: 3
-    m_Name: HorizontalGamepad2
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 3
-    dead: 0.2
-    sensitivity: 1
-    snap: 1
-    invert: 0
-    type: 2
-    axis: 0
-    joyNum: 2
   - serializedVersion: 3
     m_Name: VerticalKeyboard1
     descriptiveName: 
@@ -102,7 +86,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: VerticalGamepad1
+    m_Name: VerticalGamepad
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -117,22 +101,6 @@ InputManager:
     type: 2
     axis: 1
     joyNum: 0
-  - serializedVersion: 3
-    m_Name: VerticalGamepad2
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 3
-    dead: 0.2
-    sensitivity: 1
-    snap: 1
-    invert: 0
-    type: 2
-    axis: 1
-    joyNum: 2
   - serializedVersion: 3
     m_Name: JumpKeyboard1
     descriptiveName: 
@@ -166,11 +134,11 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: JumpGamepad2
+    m_Name: JumpGamepad
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: 
+    positiveButton: joystick 1 button 0
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -180,13 +148,13 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 2
+    joyNum: 1
   - serializedVersion: 3
-    m_Name: JumpGamepad1
+    m_Name: PauseGamepad
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 1 button 0
+    positiveButton: joystick 1 button 7
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000

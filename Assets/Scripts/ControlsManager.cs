@@ -38,13 +38,14 @@ public class ControlsManager : MonoBehaviour
         leftP1 = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftKeyP1", "A"));
         rightP1 = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightKeyP1", "D"));
         jumpP1 = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("jumpKeyP1", "Space"));
-        pauseP1 = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("pauseKeyP1", "Escape"));
+        pauseP1 = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("pauseKeyP1", "P"));
         forwardP2 = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("forwardKeyP2", "UpArrow"));
         backwardP2 = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("backwardKeyP2", "DownArrow"));
         leftP2 = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftKeyP2", "LeftArrow"));
         rightP2 = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightKeyP2", "RightArrow"));
-        jumpP2 = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("jumpKeyP2", "KeypadEnter"));
-        pauseP2 = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("pauseKeyP2", "P"));
+        jumpP2 = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("jumpKeyP2", "Keypad0"));
+        pauseP2 = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("pauseKeyP2", "End"));
+
     }
 
     // Start is called before the first frame update

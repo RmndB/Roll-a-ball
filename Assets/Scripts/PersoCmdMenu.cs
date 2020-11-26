@@ -11,35 +11,26 @@ public class PersoCmdMenu : MonoBehaviour
     private TextMeshProUGUI _text;
     private KeyCode _keyCode;
     private bool _waitForUserToPressKey;
-    private bool isAserty;
-    private bool isQwerty;
-    
+    private bool isQWERTY;
+
     [SerializeField]
-    private int _player;
+    private int player;
     [SerializeField]
     private List<TextMeshProUGUI> textButtons;
     
     // Start is called before the first frame update
     void Start()
     {
-        isAserty = false;
-        isQwerty = true;
+        isQWERTY = true;
+        TextMeshProUGUI qwertyTxt = GameObject.Find("qwerty_txt").GetComponent<TextMeshProUGUI>();
+        qwertyTxt.text = "QWERTY";
+        
         _waitForUserToPressKey = false;
 
         for (int i = 0; i < textButtons.Count; i++)
         {
             textButtons[i].text =  (getControlsMngCorrespondingString(textButtons[i].name));
         }
-
-        /*
-        GameObject[] keyBtns = GameObject.FindGameObjectsWithTag("keyButton");
-        for (int i = 0; i < keyBtns.Length; i++)
-        {
-            Button newBtn = keyBtns[i].GetComponent<Button>();
-            keyButtons.Add(newBtn);
-            newBtn.GetComponent<Text>().text =  (getControlsMngCorrespondingString(newBtn.name));
-        }
-        */
     }
 
     private void OnGUI()
@@ -68,7 +59,7 @@ public class PersoCmdMenu : MonoBehaviour
     private string getControlsMngCorrespondingString(string name)
     {
         string controlMngString = "";
-        if (_player == 1)
+        if (player == 1)
         {
             switch (name)
             {
@@ -92,7 +83,7 @@ public class PersoCmdMenu : MonoBehaviour
                     break;
             }
         }
-        else
+        else if (player == 2)
         {
             switch (name)
             {
@@ -116,7 +107,6 @@ public class PersoCmdMenu : MonoBehaviour
                     break;
             }
         }
-
         return controlMngString;
     }
 
@@ -137,7 +127,7 @@ public class PersoCmdMenu : MonoBehaviour
 
     public void modifKeyParams(string name)
     {
-        if (_player == 1)
+        if (player == 1)
         {
             switch (name)
             {
@@ -173,7 +163,7 @@ public class PersoCmdMenu : MonoBehaviour
                     break;
             }
         }
-        else
+        else if(player == 2)
         {
             switch (name)
             {
@@ -234,7 +224,7 @@ public class PersoCmdMenu : MonoBehaviour
     }
     public void switchAsertyQwerty()
     {
-        if (isQwerty)
+        if (isQWERTY)
         { 
             TextMeshProUGUI qwertyTxt = GameObject.Find("qwerty_txt").GetComponent<TextMeshProUGUI>();
             qwertyTxt.text = "AZERTY";
@@ -258,16 +248,15 @@ public class PersoCmdMenu : MonoBehaviour
             _text = GameObject.Find("btn_jump_txt").GetComponent<TextMeshProUGUI>();
             modifKeyParams("jump");
             
-            isAserty = true;
+            isQWERTY = false;
             return;
         }
-
-        if (isAserty)
+        else
         {
             backToDefault();
             TextMeshProUGUI qwertyTxt = GameObject.Find("qwerty_txt").GetComponent<TextMeshProUGUI>();
             qwertyTxt.text = "QWERTY";
-            isQwerty = true;
+            isQWERTY = true;
         }
     }
 }
