@@ -105,8 +105,7 @@ public class GameLoop : MonoBehaviour
         TextMeshProUGUI textTitle = GameObject.Find("VictoryTitle").GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI nbPieceP1 = GameObject.Find("J1Pieces").GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI nbPieceP2 = GameObject.Find("J2Pieces").GetComponent<TextMeshProUGUI>();
-        Debug.Log((countP1));
-        Debug.Log((countP2));
+
         nbPieceP1.text = countP1.ToString();
         nbPieceP2.text = countP2.ToString();
         

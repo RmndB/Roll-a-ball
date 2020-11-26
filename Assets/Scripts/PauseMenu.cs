@@ -49,7 +49,6 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         gamePaused = false;
-        Debug.Log("Quit Current Game!!!!!");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
     }
 }
