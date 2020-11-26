@@ -33,6 +33,7 @@ public class ControlsManager : MonoBehaviour
             Destroy(gameObject);
         }
         
+        //Algorithme pour la gestion des touches inspiré du vidéo « How To Build a Custom Input Manager in Unity C# » par Studica News
         forwardP1 = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("forwardKeyP1", "W"));
         backwardP1 = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("backwardKeyP1", "S"));
         leftP1 = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftKeyP1", "A"));
