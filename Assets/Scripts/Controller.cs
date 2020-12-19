@@ -21,6 +21,9 @@ public class Controller : MonoBehaviour
     private bool controlJoystick;
     
     private bool fp1, fp2, bp1, bp2, lp1, lp2, rp1, rp2, jp1, jp2;
+
+    private Master master;
+
     private void Start()
     {
         if (controller == 1 && MainMenuCmds.player1Control == "controller")
@@ -33,6 +36,8 @@ public class Controller : MonoBehaviour
         }
         rigidbody = GetComponent<Rigidbody>();
         fp1 = fp2 = bp1 = bp2 = lp1 = lp2 = rp1 = rp2 = jp1 = jp2 = false;
+
+        master = GameObject.FindGameObjectsWithTag("Music")[0].GetComponent<Master>();
     }
 
     private void FixedUpdate()
@@ -241,5 +246,6 @@ public class Controller : MonoBehaviour
     public void Jump()
     {
         rigidbody.AddForce(Vector3.up * Mathf.Sqrt(JUMP_HEIGHT * -2f * Physics.gravity.y), ForceMode.VelocityChange);
+        master.playJumpSound();
     }
 }
