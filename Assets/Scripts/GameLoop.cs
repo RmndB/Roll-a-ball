@@ -30,7 +30,15 @@ public class GameLoop : MonoBehaviour
     public float timer;
     public GameObject victoryMenu;
     public GameObject VictoryMenuFirst;
+    
+    [SerializeField]
+    private GameObject roundAroundPlayer1 = default;
+    [SerializeField]
+    private GameObject roundAroundPlayer2 = default;
 
+    private SpriteRenderer spriteP1;
+    private SpriteRenderer spriteP2;
+    
     private void Start()
     {
         victoryMenu.SetActive(false);
@@ -47,6 +55,8 @@ public class GameLoop : MonoBehaviour
         touchItemsPlayer1 = player1.GetComponent<TouchItems>();
         touchItemsPlayer2 = player2.GetComponent<TouchItems>();
 
+        spriteP1 = roundAroundPlayer1.GetComponentInChildren<SpriteRenderer>();
+        spriteP2 = roundAroundPlayer2.GetComponentInChildren<SpriteRenderer>();
         factory.Create();
     }
 
@@ -63,6 +73,10 @@ public class GameLoop : MonoBehaviour
                 touchItemsPlayer1.ResetScore();
                 touchItemsPlayer2.ResetScore();
             }
+            else
+            {
+                showAndManageRoundAroundPlayers();
+            }
         }
         else
         {
@@ -74,6 +88,25 @@ public class GameLoop : MonoBehaviour
         timerUI.text = Mathf.Round(timer).ToString() + "s";
         totalUI.text = (Factory.NUMBER_OF_COLLECTABLE -
                        (touchItemsPlayer1.GetCountPlayer() + touchItemsPlayer2.GetCountPlayer())).ToString();
+    }
+
+    private void showAndManageRoundAroundPlayers()
+    {
+        if (touchItemsPlayer1.GetCountPlayer() > touchItemsPlayer2.GetCountPlayer())
+        {
+            spriteP1.color = Color.green;
+            spriteP2.color = Color.red;
+        }
+        else if (touchItemsPlayer1.GetCountPlayer() < touchItemsPlayer2.GetCountPlayer())
+        {
+            spriteP1.color = Color.red;
+            spriteP2.color = Color.green;
+        }
+        else
+        {
+            spriteP1.color = Color.yellow;
+            spriteP2.color = Color.yellow;
+        }
     }
 
     public void showTheWinner()
