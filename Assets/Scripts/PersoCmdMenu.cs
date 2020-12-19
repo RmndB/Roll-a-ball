@@ -14,9 +14,9 @@ public class PersoCmdMenu : MonoBehaviour
     private bool isQWERTY;
 
     [SerializeField]
-    private int player;
+    private int player = default;
     [SerializeField]
-    private List<TextMeshProUGUI> textButtons;
+    private List<TextMeshProUGUI> textButtons = default;
     
     // Start is called before the first frame update
     void Start()

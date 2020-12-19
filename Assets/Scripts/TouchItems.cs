@@ -9,12 +9,14 @@ public class TouchItems : MonoBehaviour
     private LayerMask collectableLayer = default;
     [SerializeField]
     private Text scoreUI = default;
+    private Master master;
 
     private int countPlayer;
 
     private void Start()
     {
         countPlayer = DEFAULT_COUNT_VALUE;
+        master = GameObject.FindGameObjectsWithTag("Music")[0].GetComponent<Master>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,6 +26,7 @@ public class TouchItems : MonoBehaviour
             other.gameObject.SetActive(false);
             countPlayer++;
             scoreUI.text = countPlayer.ToString();
+            master.playCoinSound();
         }
     }
 

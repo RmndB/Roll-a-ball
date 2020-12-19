@@ -10,7 +10,7 @@ public class LoadingScreen : MonoBehaviour
     private float _timeToWait = 4;
     private float _progressTime;
     [SerializeField]
-    private Image _progressBar;
+    private Image _progressBar = default;
     public void Start()
     {
         _progressTime = 0;

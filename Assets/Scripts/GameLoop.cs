@@ -31,6 +31,8 @@ public class GameLoop : MonoBehaviour
     public GameObject victoryMenu;
     public GameObject VictoryMenuFirst;
 
+    private Master master;
+
     private void Start()
     {
         victoryMenu.SetActive(false);
@@ -48,6 +50,8 @@ public class GameLoop : MonoBehaviour
         touchItemsPlayer2 = player2.GetComponent<TouchItems>();
 
         factory.Create();
+
+        master = GameObject.FindGameObjectsWithTag("Music")[0].GetComponent<Master>();
     }
 
     private void Update()
@@ -74,6 +78,14 @@ public class GameLoop : MonoBehaviour
         timerUI.text = Mathf.Round(timer).ToString() + "s";
         totalUI.text = (Factory.NUMBER_OF_COLLECTABLE -
                        (touchItemsPlayer1.GetCountPlayer() + touchItemsPlayer2.GetCountPlayer())).ToString();
+
+        if (timer <= 10 && timer >= 1) {
+            master.playTimerFoley();
+        }
+
+        if ((int)timer % 3 == 0) {           
+            master.playTickSound();
+        }
     }
 
     public void showTheWinner()
@@ -81,14 +93,17 @@ public class GameLoop : MonoBehaviour
         if (touchItemsPlayer1.GetCountPlayer() > touchItemsPlayer2.GetCountPlayer())
         {
             EndTheGame(factory, PLAYER1WON, touchItemsPlayer1.GetCountPlayer(), touchItemsPlayer2.GetCountPlayer());
+            master.playWinJingle();
         }
         else if (touchItemsPlayer1.GetCountPlayer() < touchItemsPlayer2.GetCountPlayer())
         {
             EndTheGame(factory, PLAYER2WON, touchItemsPlayer1.GetCountPlayer(), touchItemsPlayer2.GetCountPlayer());
+            master.playLoseJingle();
         }
         else
         {
             EndTheGame(factory, DRAW, touchItemsPlayer1.GetCountPlayer(), touchItemsPlayer2.GetCountPlayer());
+            master.playLoseJingle();
         }
     }
 
