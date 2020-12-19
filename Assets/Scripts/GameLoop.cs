@@ -33,6 +33,14 @@ public class GameLoop : MonoBehaviour
 
     private Master master;
 
+	[SerializeField]
+    private GameObject roundAroundPlayer1 = default;
+    [SerializeField]
+    private GameObject roundAroundPlayer2 = default;
+
+    private SpriteRenderer spriteP1;
+    private SpriteRenderer spriteP2;
+    
     private void Start()
     {
         victoryMenu.SetActive(false);
@@ -49,6 +57,8 @@ public class GameLoop : MonoBehaviour
         touchItemsPlayer1 = player1.GetComponent<TouchItems>();
         touchItemsPlayer2 = player2.GetComponent<TouchItems>();
 
+        spriteP1 = roundAroundPlayer1.GetComponentInChildren<SpriteRenderer>();
+        spriteP2 = roundAroundPlayer2.GetComponentInChildren<SpriteRenderer>();
         factory.Create();
 
         master = GameObject.FindGameObjectsWithTag("Music")[0].GetComponent<Master>();
@@ -66,6 +76,10 @@ public class GameLoop : MonoBehaviour
                 showTheWinner();
                 touchItemsPlayer1.ResetScore();
                 touchItemsPlayer2.ResetScore();
+            }
+            else
+            {
+                showAndManageRoundAroundPlayers();
             }
         }
         else
@@ -85,6 +99,25 @@ public class GameLoop : MonoBehaviour
 
         if ((int)timer % 3 == 0) {           
             master.playTickSound();
+        }
+    }
+
+    private void showAndManageRoundAroundPlayers()
+    {
+        if (touchItemsPlayer1.GetCountPlayer() > touchItemsPlayer2.GetCountPlayer())
+        {
+            spriteP1.color = Color.green;
+            spriteP2.color = Color.red;
+        }
+        else if (touchItemsPlayer1.GetCountPlayer() < touchItemsPlayer2.GetCountPlayer())
+        {
+            spriteP1.color = Color.red;
+            spriteP2.color = Color.green;
+        }
+        else
+        {
+            spriteP1.color = Color.yellow;
+            spriteP2.color = Color.yellow;
         }
     }
 
