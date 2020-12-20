@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,13 +23,24 @@ public class Master : MonoBehaviour
     [SerializeField]
     private AudioSource jingleLose = default;
 
-    private float maxBackgroundVolume = 0.7f;
-    private float maxSoundVolume = 0.5f;
-    private float maxFoleyVolume = 0.6f;
+    private float maxBackgroundVolume;
+    private float maxSoundVolume;
+    private float maxFoleyVolume;
     private float fadingSpeed = 0.005f;
 
     void Start()
     {
+        if (!PlayerPrefs.HasKey("SoundVolume") || !PlayerPrefs.HasKey("BackVolume") || !PlayerPrefs.HasKey("FoleyVolume"))
+        {
+            PlayerPrefs.SetFloat("SoundVolume", 0.5f);
+            PlayerPrefs.SetFloat("BackVolume", 0.7f);
+            PlayerPrefs.SetFloat("FoleyVolume", 0.6f);
+        }
+
+        maxBackgroundVolume = PlayerPrefs.GetFloat("BackVolume");
+        maxSoundVolume = PlayerPrefs.GetFloat("SoundVolume");
+        maxFoleyVolume = PlayerPrefs.GetFloat("FoleyVolume");
+        
         if (!menu.isPlaying) {
             menu.Play();
             menu.volume = maxBackgroundVolume;
@@ -37,25 +49,39 @@ public class Master : MonoBehaviour
         inGame.volume = 0;
     }
 
+    public void Update()
+    {
+        maxBackgroundVolume = PlayerPrefs.GetFloat("BackVolume");
+        maxSoundVolume = PlayerPrefs.GetFloat("SoundVolume");
+        maxFoleyVolume = PlayerPrefs.GetFloat("FoleyVolume");
+        
+        menu.volume = maxBackgroundVolume;
+        inGame.volume = maxBackgroundVolume;
+    }
+
     public void playCoinSound() {
+        maxSoundVolume = PlayerPrefs.GetFloat("SoundVolume");
         coin.volume = maxSoundVolume;
         coin.Play();
     }
 
     public void playJumpSound()
     {
+        maxSoundVolume = PlayerPrefs.GetFloat("SoundVolume");
         jump.volume = maxSoundVolume;
         jump.Play();
     }
 
     public void playTickSound()
     {
+        maxFoleyVolume = PlayerPrefs.GetFloat("FoleyVolume");
         tick.volume = maxFoleyVolume;
         tick.Play();
     }
 
     public void playTimerFoley()
     {
+        maxFoleyVolume = PlayerPrefs.GetFloat("FoleyVolume");
         timer.volume = maxFoleyVolume;
         if (!timer.isPlaying)
         {
@@ -65,6 +91,7 @@ public class Master : MonoBehaviour
 
     public void playWinJingle()
     {
+        maxFoleyVolume = PlayerPrefs.GetFloat("FoleyVolume");
         jingleWin.volume = maxFoleyVolume;
         if (timer.isPlaying)
         {
@@ -75,6 +102,7 @@ public class Master : MonoBehaviour
 
     public void playLoseJingle()
     {
+        maxFoleyVolume = PlayerPrefs.GetFloat("FoleyVolume");
         jingleLose.volume = maxFoleyVolume;
         if (timer.isPlaying)
         {
@@ -93,27 +121,6 @@ public class Master : MonoBehaviour
         StartCoroutine(FadeIn(inGame));
         StartCoroutine(FadeOut(menu));
     }
-
-    public void setBackgroundVolume(float volume) {
-        maxBackgroundVolume = volume;
-        if (menu.volume != 0) {
-            menu.volume = maxBackgroundVolume;
-        }
-        if (inGame.volume != 0)
-        {
-            inGame.volume = maxBackgroundVolume;
-        }
-    }
-
-    public void setSoundVolume(float volume)
-    {
-        maxSoundVolume = volume;
-    }
-    public void setFoleyVolume(float volume)
-    {
-        maxFoleyVolume = volume;
-    }
-
 
     private void OnEnable()
     {
@@ -138,6 +145,7 @@ public class Master : MonoBehaviour
     }
 
     private IEnumerator FadeIn(AudioSource audio) {
+        maxBackgroundVolume = PlayerPrefs.GetFloat("BackVolume");
         while (audio.volume < maxBackgroundVolume) {
             audio.volume += fadingSpeed;
             yield return new WaitForSeconds(0.1f);

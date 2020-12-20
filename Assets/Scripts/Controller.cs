@@ -24,7 +24,7 @@ public class Controller : MonoBehaviour
 
     private Master master;
     
-	[SerializeField] private GameObject hat;
+	[SerializeField] private GameObject hat = default;
 
     private bool fAnimStarted1, bAnimStarted1, lAnimStarted1, rAnimStarted1,
         fAnimStarted2, bAnimStarted2, lAnimStarted2, rAnimStarted2; 

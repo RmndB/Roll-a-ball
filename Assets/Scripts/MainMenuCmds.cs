@@ -12,8 +12,8 @@ public class MainMenuCmds : MonoBehaviour
     static public string player1Control;
     static public string player2Control;
     public GameObject MainMenuFirst, OptionsFirst, CmdsPersoFirst, SelectCmdsPersoFirst;
-    public Slider SliderTime, SliderHard;
-    public TextMeshProUGUI txtDifficulty, txtTimeOfAGame;
+    public Slider SliderTime, SliderHard, sliderVolFoley, sliderGen, sliderVolBack;
+    public TextMeshProUGUI txtDifficulty, txtTimeOfAGame, txtVolumeFoley, txtVolumeBack, txtVolumeGen;
     public void Start()
     {
         player1Control = "keyboard";
@@ -45,6 +45,22 @@ public class MainMenuCmds : MonoBehaviour
 
         PlayerManager.useSuperAI = true;
         StartMainMenu();
+        
+        Debug.Log("Start el Menu");
+
+        float maxBackgroundVolume = PlayerPrefs.GetFloat("BackVolume");
+        float maxSoundVolume = PlayerPrefs.GetFloat("SoundVolume");
+        float maxFoleyVolume = PlayerPrefs.GetFloat("FoleyVolume");
+        Debug.Log(maxBackgroundVolume.ToString());
+        Debug.Log(maxSoundVolume.ToString());
+        Debug.Log(maxFoleyVolume.ToString());
+
+        txtVolumeBack.text = (maxBackgroundVolume*100f).ToString() + " %";
+        txtVolumeGen.text = (maxSoundVolume*100f).ToString() + " %";
+        txtVolumeFoley.text = (maxFoleyVolume*100f).ToString() + " %";
+        sliderVolFoley.value = maxFoleyVolume*100f;
+        sliderVolBack.value = maxBackgroundVolume*100f;
+        sliderGen.value = maxSoundVolume*100f;
     }
 
     public void StartOnePlayer()
@@ -130,5 +146,20 @@ public class MainMenuCmds : MonoBehaviour
         {
             player2Control = "controller";
         }
+    }
+    public void setBackgroundVolume(float volume) {
+        PlayerPrefs.SetFloat("BackVolume", volume/100f);
+        txtVolumeBack.text = volume.ToString() + " %";
+    }
+
+    public void setSoundVolume(float volume)
+    {
+        PlayerPrefs.SetFloat("SoundVolume", volume/100f);
+        txtVolumeGen.text = volume.ToString() + " %";
+    }
+    public void setFoleyVolume(float volume)
+    {
+        PlayerPrefs.SetFloat("FoleyVolume", volume/100f);
+        txtVolumeFoley.text = volume.ToString() + " %";
     }
 }
