@@ -46,14 +46,9 @@ public class MainMenuCmds : MonoBehaviour
         PlayerManager.useSuperAI = true;
         StartMainMenu();
         
-        Debug.Log("Start el Menu");
-
         float maxBackgroundVolume = PlayerPrefs.GetFloat("BackVolume");
         float maxSoundVolume = PlayerPrefs.GetFloat("SoundVolume");
         float maxFoleyVolume = PlayerPrefs.GetFloat("FoleyVolume");
-        Debug.Log(maxBackgroundVolume.ToString());
-        Debug.Log(maxSoundVolume.ToString());
-        Debug.Log(maxFoleyVolume.ToString());
 
         txtVolumeBack.text = (maxBackgroundVolume*100f).ToString() + " %";
         txtVolumeGen.text = (maxSoundVolume*100f).ToString() + " %";
