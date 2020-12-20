@@ -1665,6 +1665,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 487677811}
   m_CullTransparentMesh: 0
+--- !u!1 &572467167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 572467169}
+  - component: {fileID: 572467168}
+  - component: {fileID: 572467170}
+  m_Layer: 0
+  m_Name: EnvParticles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &572467168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572467167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 335fdd901220984448773f9784bd0609, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &572467169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572467167}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &572467170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572467167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7f30b1b876f6240ace11cdf4d5c421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - name: Snowflake
+    particlePrefab: {fileID: 3523945004906997660, guid: 24727bb8e21982f498de29dfa2efb9bb,
+      type: 3}
+    size: 10000
+  - name: Rain
+    particlePrefab: {fileID: 87262654123683983, guid: 7d63a92bd81e0904dbff33b1d1eca6bc,
+      type: 3}
+    size: 1000
 --- !u!1 &616499660 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8465736049623395704, guid: 8bbfb36221ae6af4b84315c440564b48,
