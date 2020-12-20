@@ -9,9 +9,7 @@ public class PauseMenu : MonoBehaviour
     public static bool gamePaused = false;
     public GameObject PauseMenuFirst;
     public GameObject pauseMenu;
-    public GameObject victoryMenu;
-    public GameObject VictoryMenuFirst;
-    
+
     // Start is called before the first frame update
     void Start()
     {

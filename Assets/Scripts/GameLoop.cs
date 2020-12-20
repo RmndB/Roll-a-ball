@@ -29,7 +29,7 @@ public class GameLoop : MonoBehaviour
     private TouchItems touchItemsPlayer2;
     public float timer;
     public GameObject victoryMenu;
-    public GameObject VictoryMenuFirst;
+    public GameObject victoryMenuFirst;
 
     private Master master;
 
@@ -146,7 +146,7 @@ public class GameLoop : MonoBehaviour
         factory.Create();
         victoryMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(VictoryMenuFirst);
+        EventSystem.current.SetSelectedGameObject(victoryMenuFirst);
         
         Time.timeScale = 0f;
         

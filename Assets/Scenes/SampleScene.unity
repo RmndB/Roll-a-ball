@@ -158,7 +158,7 @@ MonoBehaviour:
   totalUI: {fileID: 1340267228}
   timer: 0
   victoryMenu: {fileID: 1604845501}
-  VictoryMenuFirst: {fileID: 1373593608}
+  victoryMenuFirst: {fileID: 426370487}
   roundAroundPlayer1: {fileID: 1647152770}
   roundAroundPlayer2: {fileID: 1703945511}
 --- !u!4 &20692120
@@ -1871,8 +1871,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PauseMenuFirst: {fileID: 222942292}
   pauseMenu: {fileID: 1879258199}
-  victoryMenu: {fileID: 435980464}
-  VictoryMenuFirst: {fileID: 1373593608}
 --- !u!1001 &686543929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3298,7 +3296,7 @@ Transform:
   - {fileID: 1455131867}
   - {fileID: 252716566}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1239223808
 GameObject:
@@ -4780,7 +4778,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1604845502
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4803,10 +4801,10 @@ RectTransform:
   m_Father: {fileID: 646992347}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -544.831, y: -75.01294}
+  m_SizeDelta: {x: 483.169, y: 478.98706}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1604845503
 MonoBehaviour:
@@ -4876,7 +4874,7 @@ Transform:
   m_LocalScale: {x: 0.2063641, y: 0.18587029, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 156.38763}
 --- !u!212 &1647152772
 SpriteRenderer:
@@ -5197,7 +5195,7 @@ Transform:
   m_LocalScale: {x: 0.2063641, y: 0.18587029, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 156.38763}
 --- !u!1 &1723648776
 GameObject:
